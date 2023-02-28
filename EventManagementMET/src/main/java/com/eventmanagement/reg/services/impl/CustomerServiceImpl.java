@@ -3,6 +3,7 @@ package com.eventmanagement.reg.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepo customerRepo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Override
 	public CustomerDto createCustomer(CustomerDto customerDto) {
@@ -63,22 +67,23 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	
 	public Customer dtoToCustomer(CustomerDto customerDto) {
-		Customer customer = new Customer();
-		customer.setId(customerDto.getId());
-		customer.setName(customerDto.getName());
-		customer.setEmail(customerDto.getEmail());
-		customer.setPassword(customerDto.getPassword());
-		customer.setContactno(customerDto.getContactno());
+		Customer customer = this.modelMapper.map(customerDto, Customer.class);
+		
+//		customer.setId(customerDto.getId());
+//		customer.setName(customerDto.getName());
+//		customer.setEmail(customerDto.getEmail());
+//		customer.setPassword(customerDto.getPassword());
+//		customer.setContactno(customerDto.getContactno());
 		return customer;
 	}
 	
 	public CustomerDto customerToDto(Customer customer) {
-		CustomerDto customerDto = new CustomerDto();
-		customerDto.setId(customer.getId());
-		customerDto.setName(customer.getName());
-		customerDto.setEmail(customer.getEmail());
-		customerDto.setPassword(customer.getPassword());
-		customerDto.setContactno(customer.getContactno());
+		CustomerDto customerDto = this.modelMapper.map(customer, CustomerDto.class);
+//		customerDto.setId(customer.getId());
+//		customerDto.setName(customer.getName());
+//		customerDto.setEmail(customer.getEmail());
+//		customerDto.setPassword(customer.getPassword());
+//		customerDto.setContactno(customer.getContactno());
 		return customerDto;
 	}
 

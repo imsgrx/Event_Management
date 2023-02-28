@@ -19,6 +19,8 @@ import com.eventmanagement.reg.payloads.ApiResponse;
 import com.eventmanagement.reg.payloads.CustomerDto;
 import com.eventmanagement.reg.services.CustomerService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
@@ -28,7 +30,7 @@ public class CustomerController {
 	
 	//POST - create user
 	@PostMapping("/")
-	public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto)
+	public ResponseEntity<CustomerDto> createCustomer(@Valid @RequestBody CustomerDto customerDto)
 	{
 		CustomerDto createCustomerDto = this.customerService.createCustomer(customerDto);
 		return new ResponseEntity<CustomerDto>(createCustomerDto,HttpStatus.CREATED);
@@ -36,7 +38,7 @@ public class CustomerController {
 	
 	//PUT - update user
 	@PutMapping("/{customerId}")                //{customerID}-->path uri variable
-	public ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customerDto,@PathVariable("customerId") Integer cid)
+	public ResponseEntity<CustomerDto> updateCustomer(@Valid @RequestBody CustomerDto customerDto,@PathVariable("customerId") Integer cid)
 	{
 		CustomerDto updatedCustomer = this.customerService.updateCustomer(customerDto, cid);
 		return ResponseEntity.ok(updatedCustomer);
