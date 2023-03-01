@@ -21,7 +21,7 @@ import lombok.Setter;
 public class Customer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id; 
 	
 	@Column(name = "user_name",nullable = false,length = 100)
@@ -37,6 +37,9 @@ public class Customer {
 	
 	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
 	private List<Booking> bookings = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+	private List<Feedback> feedbacks = new ArrayList<>();
 	
 	
 	public Customer() {
