@@ -1,8 +1,17 @@
 package com.eventmanagement.reg.payloads;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class CategoryDto {
+	
+	
 	private int categoryId;
+	
+	@NotEmpty
+	@Size(min = 2)
 	private String categoryName;
+	
 	private float categoryPrice;
 	
 	public CategoryDto() {
